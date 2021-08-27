@@ -7,8 +7,9 @@
 	</v-app-bar>
 	<div class="d-flex justify-center flex-column align-center">
 		<img alt="Vue logo" src="../assets/logo.png">
-    <h1>Bienvenue sur Group+</h1>
+    <h1>Bienvenue sur Meme+</h1>
     <p><em>La plateforme communautaire de Groupomania</em></p>
+	<p><em>Où le partage de memes centrés autour du code sont maîtres!</em></p>
 	<p>Connectez vous pour communiquer !</p>
 	</div>	
     </div>

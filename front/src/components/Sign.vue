@@ -34,6 +34,16 @@
                 ></v-text-field>
               </v-col>
 
+                            <v-col cols="12" md="4">
+                <v-text-field
+                  v-model="user.pseudo"
+                  :rules="nameRules"
+                  :counter="10"
+                  label="Pseudo"
+                  required
+                ></v-text-field>
+              </v-col>
+
               <v-col cols="12" md="4">
                 <v-text-field
                   v-model="user.email"
@@ -44,9 +54,10 @@
               </v-col>
               <v-col cols="12" md="4">
                 <v-text-field
+                type="password"
                   v-model="user.password"
                   :rules="passwordRules"
-                  :counter="10"
+                  :counter="20"
                   label="Mot de passe"
                   required
                 ></v-text-field>
@@ -55,6 +66,7 @@
                 <v-text-field
                   :rules="passwordConfirmationRules"
                   label="Confirmation du Mot de passe"
+                  type="password"
                   required
                 ></v-text-field>
               </v-col>
@@ -78,8 +90,7 @@ export default {
       user: {
         password:'',
         email:'',
-        lastName:'',
-        firstName:''
+        pseudo:''
       },
       nameRules: [
         v => !!v || "Champs Obligatoire",
@@ -104,14 +115,16 @@ export default {
   },
   methods:{
     async signUp(){
-//fetch user etc
-        fetch("http://localhost:8080/signup", {
+
+        fetch("http://localhost:3000/api/auth/signup", {
             method: "POST",
             body: this.user,
             headers: {
                 "Content-Type": "application/json",
             },
+            
         });
+        
 
   }
 }
