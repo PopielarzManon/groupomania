@@ -2,9 +2,6 @@ require("dotenv").config(); //Load les variables
 const express = require("express");
 const bodyParser = require("body-parser");
 
-//Import de sécurité
-const helmet = require("helmet");
-const xssClean = require("xss-clean");
 
 //Import des routes
 const usersRoutes = require("./routes/user");
@@ -15,12 +12,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 //Sécurité de Helmet
-app.use(helmet());
-//Empèche une éventuelle entrée par le header
 app.disable("x-powered-by");
-
-app.use(xssClean());
-
 //Modifier l'accès et erreur CORS
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
