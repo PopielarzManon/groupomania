@@ -10,10 +10,8 @@ exports.createMessage = (req, res, next) => {
     UserId: res.locals.userId,
     title: req.body.title,
     content: req.body.content,
-    likes: 0,
-    dislikes: 0,
-    usersLiked: [],
-    usersDisliked: [],
+    // likes: 0,
+    // usersLiked: [],
   });
   message
     .save()
@@ -25,6 +23,7 @@ exports.createMessage = (req, res, next) => {
 
 
 exports.listMessage = (req, res, next) => {
+  console.log("oui")
     let fields = req.query.fields;
     let limit = parseInt(req.query.limit);
     let offset = parseInt(req.query.offset);
@@ -41,7 +40,7 @@ exports.listMessage = (req, res, next) => {
         },
       ],
     })
-      .then(sauces => res.status(200).json(sauces))
+      .then(messages => res.status(200).json(messages))
       .catch(error => res.status(400).json({ error }));
 }
 
@@ -66,67 +65,67 @@ exports.deleteMessage = (req, res, next) => {
     .then(() => res.status(200).json({ message: "Message supprimé !" }))
     .catch((error) => res.status(400).json({ error }));
 };
-//Likes
+// //Likes
 
-exports.likeMessage = (req, res, next) => {
-  const messageObject = req.body;
+// exports.likeMessage = (req, res, next) => {
+//   const messageObject = req.body;
 
-  if (messageObject.like === 1) {
-    Message.updateOne(
-      { _id: req.params.id },
-      {
-        $inc: { likes: +1 },
-        $push: { usersLiked: req.body.userId },
-      }
-    )
-      .then(() =>
-        res.status(200).json({ message: "Vous aimez cette sauce ! Miam" })
-      )
-      .catch((error) => res.status(400).json({ error }));
-  } else if (messageObject.like === -1) {
-    Message.updateOne(
-      { _id: req.params.id },
-      {
-        $inc: { dislikes: +1 },
-        $push: { usersDisliked: req.body.userId },
-      }
-    )
-      .then(() =>
-        res.status(200).json({ message: "Vous n'aimez pas la sauce...Beurk" })
-      )
-      .catch((error) => res.status(400).json({ error }));
-  } else {
-    Message.findOne({ _id: req.params.id })
-      .then((sauce) => {
-        if (sauce.usersLiked.includes(req.body.userId)) {
-          Sauce.updateOne(
-            { _id: req.params.id },
-            {
-              $pull: { usersLiked: req.body.userId },
-              $inc: { likes: -1 },
-            }
-          )
-            .then(() =>
-              res
-                .status(200)
-                .json({ message: "Like en moins " })
-            )
-            .catch((error) => res.status(400).json({ error }));
-        } else if (message.usersDisliked.includes(req.body.userId)) {
-          Message.updateOne(
-            { _id: req.params.id },
-            {
-              $pull: { usersDisliked: req.body.userId },
-              $inc: { dislikes: -1 },
-            }
-          )
-            .then(() =>
-              res.status(200).json({ message: "Like en plus!" })
-            )
-            .catch((error) => res.status(400).json({ error }));
-        }
-      })
-      .catch((error) => res.status(400).json({ error }));
-  }
-};
+//   if (messageObject.like === 1) {
+//     Message.updateOne(
+//       { _id: req.params.id },
+//       {
+//         $inc: { likes: +1 },
+//         $push: { usersLiked: req.body.userId },
+//       }
+//     )
+//       .then(() =>
+//         res.status(200).json({ message: "Vous aimez cette sauce ! Miam" })
+//       )
+//       .catch((error) => res.status(400).json({ error }));
+//   } else if (messageObject.like === -1) {
+//     Message.updateOne(
+//       { _id: req.params.id },
+//       {
+//         $inc: { dislikes: +1 },
+//         $push: { usersDisliked: req.body.userId },
+//       }
+//     )
+//       .then(() =>
+//         res.status(200).json({ message: "Vous n'aimez pas la sauce...Beurk" })
+//       )
+//       .catch((error) => res.status(400).json({ error }));
+//   } else {
+//     Message.findOne({ _id: req.params.id })
+//       .then((sauce) => {
+//         if (sauce.usersLiked.includes(req.body.userId)) {
+//           Sauce.updateOne(
+//             { _id: req.params.id },
+//             {
+//               $pull: { usersLiked: req.body.userId },
+//               $inc: { likes: -1 },
+//             }
+//           )
+//             .then(() =>
+//               res
+//                 .status(200)
+//                 .json({ message: "Like en moins " })
+//             )
+//             .catch((error) => res.status(400).json({ error }));
+//         } else if (message.usersDisliked.includes(req.body.userId)) {
+//           Message.updateOne(
+//             { _id: req.params.id },
+//             {
+//               $pull: { usersDisliked: req.body.userId },
+//               $inc: { dislikes: -1 },
+//             }
+//           )
+//             .then(() =>
+//               res.status(200).json({ message: "Like en plus!" })
+//             )
+//             .catch((error) => res.status(400).json({ error }));
+//         }
+//       })
+//       .catch((error) => res.status(400).json({ error }));
+//   }
+// };
 

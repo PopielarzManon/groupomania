@@ -5,6 +5,7 @@ import Home from "../views/Home.vue"
 import SignUp from "../views/SignUp.vue"
 import LogIn from "../views/LogIn.vue"
 import Wall from "../views/Wall.vue"
+import Newmsg from '../views/Newmsg.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -28,6 +29,11 @@ const routes = [
     path: '/wall',
     name: 'Wall',
     component: Wall
+  },
+  {
+    path: '/messages',
+    name: 'Newmsg',
+    component: Newmsg
   }
 ]
 

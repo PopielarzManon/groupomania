@@ -7,21 +7,30 @@ export default new Vuex.Store({
   state: {
     user:{
       pseudo: '',
-      idUser:'',
-      email: ''
-    }
+      id:'',
+      email: '',
+      isAdmin:'',
+      
+    },
+    token:''
   },
   mutations: {
     LOGIN(state,data){
-      state.user.pseudo = data.user.pseudo
-      state.user.id = data.user.id
-      state.user.email = data.user.email
+      state.user.pseudo = data.user
+      state.user.id = data.userId
+      state.user.email = data.email
+      state.user.isAdmin = data.isAdmin
+      state.token = data.token
+      
 
-    }
+
+    },
 
   },
   getters:{
-    getUser:state => state.user
+    getUser:state => state.user,
+    getToken: state => state.token
+
   },
   actions: {
   
