@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 
 //Import des routes
 const usersRoutes = require("./routes/user");
+const messageRoutes = require('./routes/message');
 // init express
 const app = express();
 
@@ -27,5 +28,6 @@ app.use((req, res, next) => {
   next();
 });
 app.use('/api/auth', usersRoutes);
+app.use('/api/messages', messageRoutes)
 
 module.exports = app;

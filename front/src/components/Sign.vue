@@ -99,6 +99,7 @@ export default {
       emailRules: [
         v => !!v || "Champs Obligatoire",
         v => /.+@.+/.test(v) || "Utilisez un email valide",
+        //v => checkEmail puis fetch vers db OU popup erreur
       ],
       passwordConfirmationRules: [
         v => !!v || "Champs Obligatoire",
@@ -113,21 +114,27 @@ export default {
 
 
   },
-  methods:{
-    async signUp(){
-
-        fetch("http://localhost:3000/api/auth/signup", {
-            method: "POST",
-            body: this.user,
-            headers: {
-                "Content-Type": "application/json",
-            },
-            
+  methods: {
+    validate() {
+      this.$refs.form.validate();
+    },
+    signUp() {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(this.user),
+      };
+      fetch("http://localhost:3000/api/auth/signup/", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.user.id) {
+            this.$store.commit('LOGIN',data)
+            this.$router.push('Wall');
+          }
         });
-        
+    },
+  },
 
-  }
-}
 }
 </script>
 

@@ -14,7 +14,7 @@
             <v-row>
               <v-col cols="10" md="12">
                 <v-text-field
-                  v-model="userLog.email"
+                  v-model="user.email"
                   :rules="emailRules"
                   label="E-mail"
                   required
@@ -23,7 +23,7 @@
               <v-col cols="10" md="12">
                 <v-text-field
                 type="password"
-                  v-model="userLog.password"
+                  v-model="user.password"
                   :counter="20"
                   label="Mot de passe"
                   required
@@ -33,7 +33,7 @@
           </v-container>
         </v-form>
         <div class="d-flex justify-center">
-          <v-btn class="btn" elevation="2" large @click="logIn"> Se connecter </v-btn>
+          <v-btn class="btn" elevation="2" large @click="login"> Se connecter </v-btn>
         </div>
       </v-app>
     </div>
@@ -48,7 +48,7 @@ export default {
 
     return {
       valid: false,
-      userLog: {
+      user: {
         email:'',
         password:''
       },
@@ -58,19 +58,27 @@ export default {
     ],
   };
   },
-   methods:{
-    async logIn(){
-
-        fetch("http://localhost:8080/login", {
-            method: "POST",
-            body: this.userLog,
-            headers: {
-                "Content-Type": "application/json",
-            },
+ methods: {
+    validate() {
+      this.$refs.form.validate();
+    },
+    login() {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(this.user),
+      };
+      fetch("http://localhost:3000/api/auth/login/", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.userId) {
+            this.$store.commit('LOGIN',data)
+            this.$router.push('Wall');
+          }
         });
+    },
+  },
 
-  }
-   }
 }
 
 </script>
