@@ -1,8 +1,9 @@
 <template>
   <div class="wall">
  <Header />
-  
+  <h1>A la une sur le mur...</h1>
 <div id="app">
+  
   <WallC />
 
 </div>
@@ -50,5 +51,10 @@ export default {
         color: rgb(145, 145, 145)  !important;;
       }
   }
+}
+h1{
+  text-align: center;
+  color: pink;
+  padding: 2vw;
 }
 </style>

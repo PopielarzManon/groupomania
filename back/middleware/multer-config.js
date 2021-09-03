@@ -5,6 +5,7 @@ const MIME_TYPES = {
   "image/jpg": "jpg",
   "image/jpeg": "jpg",
   "image/png": "png",
+  "image/gif" : "gif"
 };
 //Utilise la méthode multer pour sauvegarder le fichier
 const storage = multer.diskStorage({
@@ -19,4 +20,4 @@ const storage = multer.diskStorage({
   },
 });
 //exporte le fichier pour qu'il soit unique
-module.exports = multer({ storage: storage }).single("image");
+module.exports = multer({ storage: storage }).single("attachment");

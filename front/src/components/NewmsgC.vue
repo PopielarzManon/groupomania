@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-           <p class="d-flex justify-center txt">
-      <b> Postez un message ! !</b>
-    </p>
+      <p class="d-flex justify-center txt">
+        <b> Postez un message ! !</b>
+      </p>
       <v-form v-model="valid">
         <v-container>
           <v-row>
@@ -23,7 +23,6 @@
                 :rules="contentRules"
                 :counter="140"
                 label="Contenu"
-                required
               ></v-text-field>
             </v-col>
 
@@ -32,24 +31,24 @@
                 <v-file-input
                   show-size
                   v-model="message.attachment"
+                  type = "file"
                   counter
-                  multiple
                   label="File input"
                   required
                 ></v-file-input>
               </div>
- 
             </v-col>
           </v-row>
         </v-container>
       </v-form>
-           <div class="d-flex justify-center">
-          <v-btn class="btn" elevation="2" large @click="postMsg"> Poster </v-btn>
-        </div>
+      <div class="d-flex justify-center">
+        <v-btn class="btn" elevation="2" large @click="postMsg"> Poster </v-btn>
+      </div>
     </v-app>
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "NewmsgC",
 
@@ -57,9 +56,10 @@ export default {
     return {
       valid: false,
       message: {
-        title: '',
-        content: '',
-        attachment: ''
+        UserId:"",
+        title: "",
+        content: "",
+        attachment:""
       },
       titleRules: [
         (v) => !!v || "Champs Obligatoire",
@@ -75,27 +75,41 @@ export default {
       ],
     };
   },
-  methods:{
-       validate() {
+  methods: {
+    validate() {
       this.$refs.form.validate();
-    }, 
+    },
+    
     postMsg() {
+      const newForm = new FormData();
+      newForm.append("attachment", this.message.attachment);
+      newForm.append("content",this.message.content);
+      newForm.append("title", this.message.title);
+      // newForm.append("UserId", this.$store.getters.getUser.pseudo);
+
+      
+
       const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json",
-        // authorization: "Bearer " + this.$store.getters.getToken, 
+        headers: {
+          // "Content-Type": "multipart/form-data",
+          authorization: "Bearer " + this.$store.getters.getToken,
         },
-        body: JSON.stringify(this.message),
+        body: newForm,
       };
       fetch("http://localhost:3000/api/messages", requestOptions)
         .then((response) => response.json())
         .then((data) => {
-          if (data.message.title) {
-            this.$router.push('Wall');
+          if (data.message.content) {
+            alert("Votre message a bien été posté !");
+            this.$router.push("Wall");
           }
+          
         });
     },
   },
-
-  }
+  computed: {
+    ...mapGetters(["getToken"], ["getUser"]),
+  },
+};
 </script>

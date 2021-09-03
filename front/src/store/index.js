@@ -25,11 +25,15 @@ export default new Vuex.Store({
 
 
     },
+    GET_MESSAGES(state, data) {
+      state.messages = data;
+    },
 
   },
   getters:{
     getUser:state => state.user,
-    getToken: state => state.token
+    getToken: state => state.token,
+    getMessages: state => state.messages
 
   },
   actions: {

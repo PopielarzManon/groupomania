@@ -2,7 +2,7 @@
   <v-card color="grey lighten-4" flat height="7vw" tile>
     <v-toolbar dense>
       <v-btn icon>
-        <v-icon>mdi-home</v-icon>
+        <router-link to="/wall" class="routerLink"><v-icon class="icn">mdi-home</v-icon></router-link>
       </v-btn>
 
       <v-toolbar-title>Bienvenue {{ getUser.pseudo }} 👋 </v-toolbar-title>
@@ -32,4 +32,11 @@ export default {
 </script>
 
 <style lang="scss">
+ .icn{
+    font-size: 2.5vw !important;
+      color: rgb(91, 91, 91) !important;
+      &:hover{
+        color: pink  !important;
+      }
+  }
 </style>

@@ -6,11 +6,16 @@ const db = require("../models/index");
 
 
 exports.createMessage = (req, res, next) => {
+  let attachment
+  if (req.file) {
+    attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+  }
   const message = db.Message.build({
     UserId: res.locals.userId,
     title: req.body.title,
     content: req.body.content,
-    // likes: 0,
+    attachment: attachment,
+    likes: 0,
     // usersLiked: [],
   });
   message

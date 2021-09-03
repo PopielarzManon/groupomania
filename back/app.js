@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 //Import des routes
 const usersRoutes = require("./routes/user");
 const messageRoutes = require('./routes/message');
+const path = require("path");
 // init express
 const app = express();
 
@@ -27,6 +28,7 @@ app.use((req, res, next) => {
   );
   next();
 });
+app.use('/images', express.static(path.join(__dirname, "images")))
 app.use('/api/auth', usersRoutes)
 app.use('/api/messages', messageRoutes)
 
