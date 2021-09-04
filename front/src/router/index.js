@@ -6,6 +6,7 @@ import SignUp from "../views/SignUp.vue"
 import LogIn from "../views/LogIn.vue"
 import Wall from "../views/Wall.vue"
 import Newmsg from '../views/Newmsg.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -35,11 +36,11 @@ const routes = [
     name: 'Newmsg',
     component: Newmsg
   },
-  {
-    path: '/:messageId',
-    name: 'Comment',
-    component: Comment
-  }
+  // {
+  //   path: '/:messageId',
+  //   name: 'Comment',
+  //   component: Comment
+  // }
 ]
 
 const router = new VueRouter({

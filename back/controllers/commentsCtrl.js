@@ -1,29 +1,27 @@
-const models = require ('../models');
+const db = require ('../models/index');
 
-module.exports = {
-
-    createComment : function(req, res, next){
-    const comment = {
-        userId: req.body.userId,
-        publicationId: req.params.messageId,
+exports.createComment = (req, res, next) =>{
+    const comment = db.Comment.build({
+        userId: req.locals.userId,
+        publicationId: req.locals.messageId,
         content: req.body.content,
-    }
-    models.Comment.create(comment).then(result => {
-        res.status(201).json({
-            message: 'Commentaire crée!'
-        });
-        })
-        .catch((error) => res.status(400).json({ error }));
-    },
-    getAllComments: function(req, res, next){
-        models.Comment.findAll({
+    });
+    comment
+    .save()
+    .then(() => res.status(201).json({ message: "Commentaire enregistré !" }))
+    .catch((error) => res.status(400).json({ error }));
+},
+
+
+
+    exports.getAllComments = (req, res, next)=>{
+        db.Comment.findAll({
             where: {messageId: req.params.messageId},
             include:{
-            model: models.User, 
+            model: db.User, 
             }
         }).then(result => {
             res.status(200).json(result);
         })
         .catch((error) => res.status(400).json({ error }));
-    },
-}
+    }

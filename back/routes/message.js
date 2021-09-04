@@ -3,7 +3,7 @@ const router = express.Router();
 const auth = require('../middleware/auth')
 const messageCtrl = require('../controllers/messagesCtrl');
 const multer = require('../middleware/multer-config')
-const commentsCtrl = require('../controllers/comments')
+const commentsCtrl = require('../controllers/commentsCtrl')
 
 router.post('/', auth, multer, messageCtrl.createMessage);
 router.put('/:id', auth, multer, messageCtrl.modifyMessage);

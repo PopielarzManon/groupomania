@@ -39,14 +39,15 @@
 
 <script>
 
-
 export default {
+
   name: "WallC",
   data() {
     return {
       messages: [],
     };
   },
+  
   mounted() {
     const requestOptions = {
       method: "GET",

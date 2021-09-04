@@ -100,7 +100,7 @@ export default {
       fetch("http://localhost:3000/api/messages", requestOptions)
         .then((response) => response.json())
         .then((data) => {
-          if (data.message.content) {
+          if (data.message.title) {
             alert("Votre message a bien été posté !");
             this.$router.push("Wall");
           }
