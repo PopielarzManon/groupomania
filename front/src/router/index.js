@@ -36,11 +36,11 @@ const routes = [
     name: 'Newmsg',
     component: Newmsg
   },
-  // {
-  //   path: '/:messageId',
-  //   name: 'Comment',
-  //   component: Comment
-  // }
+  {
+    path: '/:messageId',
+    name: 'Comment',
+    component: Comment
+  }
 ]
 
 const router = new VueRouter({

@@ -5,7 +5,7 @@
         <v-card
       >
           <v-card-title>
-            {{ message.title }} - {{ message.User.pseudo }}
+            {{ message.title }} 
             </v-card-title>
           
           
@@ -25,6 +25,12 @@
               {{ message.content }}
             </div>
           </v-card-text>
+                <v-card-text>
+            <div>
+                   {{message.createdAt}}- {{ message.User.pseudo }}
+            </div>
+          </v-card-text>
+     
 
           <v-card-actions>
             <v-btn color="pink lighten-2" text> Commentez ! </v-btn>
