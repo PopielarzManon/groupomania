@@ -29,15 +29,9 @@ exports.createMessage = (req, res, next) => {
 
 exports.listMessage = (req, res, next) => {
   console.log("oui")
-    let fields = req.query.fields;
-    let limit = parseInt(req.query.limit);
-    let offset = parseInt(req.query.offset);
     let order = req.query.order;
     db.Message.findAll({
-      order: [order != null ? order.split(":") : ["title", "ASC"]],
-      attributes: fields !== "*" && fields != null ? fields.split(",") : null,
-      limit: !isNaN(limit) ? limit : null,
-      offset: !isNaN(offset) ? offset : null,
+      order: [order != null ? order.split(":") : ["createdAt", "DESC"]],
       include: [
         {
           model: db.User,
