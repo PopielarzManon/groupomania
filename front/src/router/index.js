@@ -34,6 +34,11 @@ const routes = [
     path: '/messages',
     name: 'Newmsg',
     component: Newmsg
+  },
+  {
+    path: '/:messageId',
+    name: 'Comment',
+    component: Newmsg
   }
 ]
 

@@ -10,7 +10,7 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-arrow-up-bold-box-outline</v-icon>
+        <v-icon  @click="logout()" >mdi-arrow-up-bold-box-outline</v-icon>
       </v-btn>
 
       <v-btn icon>
@@ -27,6 +27,12 @@ export default {
   name: "Header",
   computed: {
     ...mapGetters(["getUser"]),
+  },
+    methods: {
+    logout() {
+      this.$store.commit("LOGOUT");
+       this.$router.push("/");
+    },
   },
 };
 </script>

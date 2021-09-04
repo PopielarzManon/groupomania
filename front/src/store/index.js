@@ -28,12 +28,21 @@ export default new Vuex.Store({
     GET_MESSAGES(state, data) {
       state.messages = data;
     },
+    GET_COMMENTS(state, data) {
+      state.comments = data;
+    },
+    LOGOUT(state) {
+      state.token = "";
+      state.username = "";
+      state.isAdmin = "";
+    },
 
   },
   getters:{
     getUser:state => state.user,
     getToken: state => state.token,
-    getMessages: state => state.messages
+    getMessages: state => state.messages,
+    getComments: state => state.comments
 
   },
   actions: {
