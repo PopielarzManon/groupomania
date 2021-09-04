@@ -17,7 +17,7 @@ module.exports = {
     },
     getAllComments: function(req, res, next){
         models.Comment.findAll({
-            where: {publicationId: req.params.messageId},
+            where: {messageId: req.params.messageId},
             include:{
             model: models.User, 
             }

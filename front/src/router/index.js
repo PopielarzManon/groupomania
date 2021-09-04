@@ -38,7 +38,7 @@ const routes = [
   {
     path: '/:messageId',
     name: 'Comment',
-    component: Newmsg
+    component: Comment
   }
 ]
 
