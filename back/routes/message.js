@@ -11,7 +11,7 @@ router.delete('/:id', auth, messageCtrl.deleteMessage);
 router.get('/', auth, multer, messageCtrl.listMessage);
 // router.post("/:id/like", auth, messageCtrl.likeMessage);
 // router.get('/:id', )
-router.get('/:messageId/comments',auth, multer, commentsCtrl.getAllComments);
+router.get('/:messageId/comments',auth, multer, commentsCtrl.listComments);
 router.post('/:messageId/comments', auth, multer, commentsCtrl.createComment);
 
 

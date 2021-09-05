@@ -31,5 +31,6 @@ app.use((req, res, next) => {
 app.use('/images', express.static(path.join(__dirname, "images")))
 app.use('/api/auth', usersRoutes)
 app.use('/api/messages', messageRoutes)
+app.use('/api/:messagesId/comments', messageRoutes)
 
 module.exports = app;

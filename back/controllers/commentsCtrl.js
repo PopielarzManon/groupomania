@@ -2,8 +2,8 @@ const db = require ('../models/index');
 
 exports.createComment = (req, res, next) =>{
     const comment = db.Comment.build({
-        userId: req.locals.userId,
-        publicationId: req.locals.messageId,
+        UserId: req.locals.userId,
+        messageId: req.locals.messageId,
         content: req.body.content,
     });
     comment
@@ -14,11 +14,13 @@ exports.createComment = (req, res, next) =>{
 
 
 
-    exports.getAllComments = (req, res, next)=>{
+    exports.listComments = (req, res, next)=>{
+        let order = req.query.order;
         db.Comment.findAll({
+            order: [order != null ? order.split(":") : ["createdAt", "DESC"]],
             include:
             {
-            model: db.User, 
+            model: db.Message, 
             }
         }).then(result => {
             res.status(200).json(result);

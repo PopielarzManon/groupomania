@@ -26,15 +26,15 @@
             </div>
           </v-card-text>
                 <v-card-text>
-            <div>
+            <div class="color">
                    {{message.createdAt}}- {{ message.User.pseudo }}
             </div>
           </v-card-text>
      
 
           <v-card-actions>
-            <v-btn color="pink lighten-2" text> Commentez ! </v-btn>
-            <v-btn color="pink lighten-2" text> Voir les commentaires </v-btn>
+            <router-link to="/:messagesId/comments" class="routerLink"><v-btn color="pink lighten-2" text> Commentez ! </v-btn></router-link>
+            <router-link to="/:messagesId/comments" class="routerLink"><v-btn color="pink lighten-2" text> Voir les commentaires </v-btn></router-link>
           </v-card-actions>
         </v-card>
       </v-app>
@@ -85,6 +85,9 @@ export default {
   list-style: none;
   .card{
     margin:2vw;
+  }
+  .color{
+    color: pink;
   }
 }
 </style>

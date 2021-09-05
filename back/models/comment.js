@@ -13,11 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.Comment.belongsTo(models.User, { foreignKey: 'userId' })
       models.Comment.belongsTo(models.Message, { foreignKey: 'messageId' })
+      
     }
   };
   Comment.init({
-    userId: DataTypes.STRING,
-    messageId: DataTypes.STRING,
     content: DataTypes.STRING
   }, {
     sequelize,

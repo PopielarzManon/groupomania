@@ -1,5 +1,5 @@
 <template>
-  <v-card color="grey lighten-4" flat height="7vw" tile>
+  <v-card color="grey lighten-4" flat height="4vw" tile>
     <v-toolbar dense>
       <v-btn icon>
         <router-link to="/wall" class="routerLink"><v-icon class="icn">mdi-home</v-icon></router-link>

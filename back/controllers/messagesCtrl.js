@@ -28,7 +28,6 @@ exports.createMessage = (req, res, next) => {
 
 
 exports.listMessage = (req, res, next) => {
-  console.log("oui")
     let order = req.query.order;
     db.Message.findAll({
       order: [order != null ? order.split(":") : ["createdAt", "DESC"]],

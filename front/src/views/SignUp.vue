@@ -24,4 +24,9 @@ export default {
 }
 
 </script>
+<style lang="scss" scoped>
+.signup{
+background-image: url("../assets/back.png")
+}
+</style>
 

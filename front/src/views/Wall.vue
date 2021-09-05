@@ -33,6 +33,10 @@ export default {
 
 </script>
 <style lang="scss" scoped>
+.wall{
+  background-image: url("../assets/back.png")
+
+}
 .float{
 	position:fixed;
 	width:5vw !important;
