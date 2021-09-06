@@ -1,7 +1,7 @@
 <template >
   <div id="app" class="comment">
     <h1>Poster votre commentaire !</h1>
-    <v-form v-model="valid">
+    <v-form>
       <v-container>
         <v-row>
           <v-col cols="12" md="4">
@@ -17,7 +17,7 @@
     </v-form>
     <div class="d-flex justify-center">
       <v-btn class="btn" elevation="2" large @click="postComment">
-        Poster votre commentaire !
+        Poster
       </v-btn>
     </div>
     <h1>Les autres commentaires...</h1>
@@ -28,12 +28,12 @@
             <v-card-title>
               <v-icon large left> mdi-twitter </v-icon>
               <span class="text-h6 font-weight-light">{{
-                getMessages.title
+                message.title
               }}</span>
             </v-card-title>
 
             <v-card-text class="text-h5 font-weight-bold">
-              {{ comments.content }}
+              {{ comment.content }}
             </v-card-text>
 
             <v-card-actions>
@@ -41,7 +41,7 @@
                 <v-list-item-avatar color="grey darken-3"> </v-list-item-avatar>
 
                 <v-list-item-content>
-                  <v-list-item-title>{{ getUser.pseudo }}</v-list-item-title>
+                  <v-list-item-title>{{ comment.User.pseudo }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-card-actions>
@@ -57,45 +57,48 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["getToken"], ["getUser"], ["getMessages"]),
+    ...mapGetters(["getToken", "getUser"]),
   },
 
   name: "CommentC",
   data() {
     return {
-    comment:{
-      content: "",
-        },
+      comment: {
+        content: "",
+      },
+      message:{
+          title:"",
+          },
       commentRules: [
-      v => v.length <= 250 || 'Name must be less than 10 characters',
-    ],
+        (v) => v.length <= 250 || "Name must be less than 10 characters",
+      ],
+      comments : []
     };
   },
   methods: {
     validate() {
       this.$refs.form.validate();
     },
-    
+
     postComment() {
-      const newFormC = new FormData();
-      newFormC.append("content",this.comment.content);
-      // newForm.append("UserId", this.$store.getters.getUser.pseudo);
+
       const requestOptions = {
         method: "POST",
         headers: {
-          // "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
           authorization: "Bearer " + this.$store.getters.getToken,
         },
-        body: newFormC,
+        body: JSON.stringify(this.comment),
       };
-      fetch("http://localhost:3000/api/:messagesId/comments", requestOptions)
+      const messageId = this.$route.params.messageId
+      fetch("http://localhost:3000/api/messages/"+ messageId +"/comments", requestOptions)
         .then((response) => response.json())
         .then((data) => {
-          if (data.message.title) {
-            alert("Votre commentaire a bien été posté !");
-            this.$router.push("/:messagesId/comments");
+          if (data.comment.content) {
+            data.comment.User = {}
+            data.comment.User.pseudo = this.getUser.pseudo
+            this.comments.unshift(data.comment)
           }
-          
         });
     },
   },
@@ -108,14 +111,20 @@ export default {
         authorization: "Bearer " + this.$store.getters.getToken,
       },
     };
-    fetch("http://localhost:3000/api/:messagesId/comments", requestOptions)
+    const messageId = this.$route.params.messageId
+    fetch("http://localhost:3000/api/messages/"+ messageId +"/comments", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         this.comments = data;
       });
-      
-   },  
-}  
+    fetch("http://localhost:3000/api/messages/"+ messageId, requestOptions)
+         .then((response) => response.json())
+      .then((data) => {
+        this.message.title = data.title;
+      });
+
+  },
+};
 </script>
 
 
@@ -129,5 +138,4 @@ h1 {
   padding: 2vw;
   font-size: 2vw;
 }
-
 </style>

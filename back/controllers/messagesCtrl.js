@@ -63,6 +63,14 @@ exports.deleteMessage = (req, res, next) => {
     .then(() => res.status(200).json({ message: "Message supprimé !" }))
     .catch((error) => res.status(400).json({ error }));
 };
+
+exports.getOneMessage = (req, res, next) =>{
+  db.Message.findOne({
+    where: { id: req.params.id},
+  })
+    .then(message => res.status(200).json(message))
+    .catch(error => res.status(400).json({ error }));
+}
 // //Likes
 
 // exports.likeMessage = (req, res, next) => {

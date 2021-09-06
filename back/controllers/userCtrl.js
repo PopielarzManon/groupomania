@@ -18,13 +18,15 @@ exports.signup = (req, res) => {
           isAdmin: 0
       });
       user
+
       .save()
-      .then((user) =>
+      .then((user) =>{
           res.status(201).json({
             email: user.email,
             isAdmin: user.isAdmin,
-            user: user.username,
+            user: user.pseudo,
             userId: user.id,
+            
             token: jwt.sign(
               
               { userId: user.id }, 
@@ -32,7 +34,8 @@ exports.signup = (req, res) => {
               { expiresIn: "12h" }
             ),
           })
-        )
+      })
+
       .then(() => res.status(201).json({ message: 'Utilisateur créé !', user:user }))
       .catch(error => res.status(400).json({ error }));
   })

@@ -14,7 +14,7 @@
         <v-form v-model="valid">
           <v-container>
             <v-row>
-              <v-col cols="12" md="4">
+              <!-- <v-col cols="12" md="4">
                 <v-text-field
                   v-model="user.firstName"
                   :rules="nameRules"
@@ -32,7 +32,7 @@
                   label="Nom"
                   required
                 ></v-text-field>
-              </v-col>
+              </v-col> -->
 
                             <v-col cols="12" md="4">
                 <v-text-field
@@ -127,7 +127,7 @@ export default {
       fetch("http://localhost:3000/api/auth/signup/", requestOptions)
         .then((response) => response.json())
         .then((data) => {
-          if (data.user.id) {
+          if (data.userId) {
             this.$store.commit('LOGIN',data)
             this.$router.push('Wall');
           }

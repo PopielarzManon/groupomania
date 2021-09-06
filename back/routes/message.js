@@ -8,11 +8,12 @@ const commentsCtrl = require('../controllers/commentsCtrl')
 router.post('/', auth, multer, messageCtrl.createMessage);
 router.put('/:id', auth, multer, messageCtrl.modifyMessage);
 router.delete('/:id', auth, messageCtrl.deleteMessage);
-router.get('/', auth, multer, messageCtrl.listMessage);
+router.get('/', auth, messageCtrl.listMessage);
+router.get('/:id', auth,  messageCtrl.getOneMessage);
 // router.post("/:id/like", auth, messageCtrl.likeMessage);
 // router.get('/:id', )
-router.get('/:messageId/comments',auth, multer, commentsCtrl.listComments);
-router.post('/:messageId/comments', auth, multer, commentsCtrl.createComment);
+router.get('/:messageId/comments',auth, commentsCtrl.listComments);
+router.post('/:messageId/comments', auth, commentsCtrl.createComment);
 
 
 module.exports = router;

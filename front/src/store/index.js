@@ -21,12 +21,7 @@ export default new Vuex.Store({
       state.user.email = data.email
       state.user.isAdmin = data.isAdmin
       state.token = data.token
-      
 
-
-    },
-    GET_MESSAGES(state, data) {
-      state.messages = data;
     },
     GET_COMMENTS(state, data) {
       state.comments = data;
@@ -41,7 +36,6 @@ export default new Vuex.Store({
   getters:{
     getUser:state => state.user,
     getToken: state => state.token,
-    getMessages: state => state.messages,
     getComments: state => state.comments
 
   },

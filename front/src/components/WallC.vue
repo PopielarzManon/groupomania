@@ -33,8 +33,7 @@
      
 
           <v-card-actions>
-            <router-link to="/:messagesId/comments" class="routerLink"><v-btn color="pink lighten-2" text> Commentez ! </v-btn></router-link>
-            <router-link to="/:messagesId/comments" class="routerLink"><v-btn color="pink lighten-2" text> Voir les commentaires </v-btn></router-link>
+            <router-link :to = "{name: 'Comments', params : {messageId:message.id} }"><v-btn color="pink lighten-2" text> Commentaires </v-btn></router-link>
           </v-card-actions>
         </v-card>
       </v-app>

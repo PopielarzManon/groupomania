@@ -1,14 +1,15 @@
 const db = require ('../models/index');
 
 exports.createComment = (req, res, next) =>{
+    console.log(req.body)
     const comment = db.Comment.build({
-        UserId: req.locals.userId,
-        messageId: req.locals.messageId,
+        userId: res.locals.userId,
+        messageId: req.params.messageId,
         content: req.body.content,
     });
     comment
     .save()
-    .then(() => res.status(201).json({ message: "Commentaire enregistré !" }))
+    .then(() => res.status(201).json({ message: "Commentaire enregistré !", comment}))
     .catch((error) => res.status(400).json({ error }));
 },
 
@@ -18,10 +19,12 @@ exports.createComment = (req, res, next) =>{
         let order = req.query.order;
         db.Comment.findAll({
             order: [order != null ? order.split(":") : ["createdAt", "DESC"]],
-            include:
-            {
-            model: db.Message, 
-            }
+            include: [
+                {
+                  model: db.User,
+                  attributes: ["pseudo"],
+                },
+            ]
         }).then(result => {
             res.status(200).json(result);
         })
