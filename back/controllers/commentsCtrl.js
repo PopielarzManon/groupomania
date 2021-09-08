@@ -24,9 +24,34 @@ exports.createComment = (req, res, next) =>{
                   model: db.User,
                   attributes: ["pseudo"],
                 },
-            ]
+                
+            ],
+            where: { messageId: req.params.messageId}
         }).then(result => {
             res.status(200).json(result);
         })
         .catch((error) => res.status(400).json({ error }));
     }
+
+    exports.deleteComment = (req, res, next) => {
+        if (!res.locals.isAdmin) {
+            db.Comment.destroy({
+              where: {
+                id: req.params.id, UserId: res.locals.id
+              }
+        
+        
+            })
+              .then(() => res.status(200).json({ message: "Commentaire supprimé !" }))
+              .catch((error) => res.status(400).json({ error }));
+          } else {
+            db.Comment.destroy({
+              where: {
+                id: req.params.id
+              }
+        
+            })
+              .then(() => res.status(200).json({ message: "Commentaire supprimé !" }))
+              .catch((error) => res.status(400).json({ error }));
+          }
+        }

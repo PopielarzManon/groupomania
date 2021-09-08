@@ -31,12 +31,12 @@ export default new Vuex.Store({
       state.username = "";
       state.isAdmin = "";
     },
-
   },
   getters:{
     getUser:state => state.user,
     getToken: state => state.token,
-    getComments: state => state.comments
+    getComments: state => state.comments,
+    getAdmin: state => state.isAdmin
 
   },
   actions: {

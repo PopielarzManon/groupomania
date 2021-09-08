@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const db = require("../models/index");
 require("dotenv").config();
 
 module.exports = (req, res, next) => {
@@ -13,7 +14,14 @@ module.exports = (req, res, next) => {
       throw "Invalid user ID";
     } else {
       res.locals.userId = userId
-      next();
+      db.User.findOne({
+        where : { id : userId}
+      })
+      .then(user => {
+        res.locals.isAdmin = user.isAdmin 
+        next(); 
+      })
+     
     }
   } catch {
     res.status(401).json({

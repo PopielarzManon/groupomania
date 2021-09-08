@@ -79,3 +79,13 @@ exports.login = (req, res) => {
   .catch(error => res.status(500).json({ error }));
 };
 
+//Delete
+
+exports.deleteUser = (req, res, next) => {
+  db.User.destroy({
+    where: { id: res.locals.userId },
+  })
+    .then(() => res.status(200).json({ message: "Utilisateur supprimé" }))
+    .catch((error) => res.status(400).json({ error }));
+};
+

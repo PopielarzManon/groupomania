@@ -6,7 +6,13 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        reference:{
+          model:'Messages',
+          key:'id'
+        },
+
+        onDelete : "cascade"
       },
       userId: {
         type: Sequelize.STRING
