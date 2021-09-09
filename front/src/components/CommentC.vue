@@ -22,21 +22,18 @@
     </div>
     <h1>Les autres commentaires...</h1>
     <div class="allComments">
-      <li v-for="comment in comments" :key="comment.id">
+      <li v-for="(comment, index) in comments" :key="comment.id">
         <v-app id="inspire" class="card">
-          <v-card dark>
+          <v-card class="bc">
             <v-card-title>
-              <v-icon large left> mdi-twitter </v-icon>
               <span class="text-h6 font-weight-light">{{ message.title }}</span>
             </v-card-title>
 
-            <v-card-text class="text-h5 font-weight-bold">
-              {{ comment.content }}
-            </v-card-text>
-
             <v-card-actions>
               <v-list-item class="grow">
-                <v-list-item-avatar color="grey darken-3"> </v-list-item-avatar>
+                <v-list-item-avatar color="grey darken-3"
+                  ><img src="../assets/logoicon.png" class="icn" />
+                </v-list-item-avatar>
 
                 <v-list-item-content>
                   <v-list-item-title>{{
@@ -48,12 +45,16 @@
                   v-if="getUser.id == comment.userId || getUser.isAdmin == 1"
                   text
                 >
-                  <v-icon @click.prevent="deleteMessage()">
+                  <v-icon @click.prevent="deleteComment(comment.id, index)">
                     mdi-trash-can-outline
                   </v-icon>
                 </v-btn>
               </v-list-item>
             </v-card-actions>
+
+            <v-card-text class="text-h5 font-weight-bold">
+              {{ comment.content }}
+            </v-card-text>
           </v-card>
         </v-app>
       </li>
@@ -85,8 +86,23 @@ export default {
     };
   },
   methods: {
-    validate() {
-      this.$refs.form.validate();
+    deleteComment(commentId, index) {
+      const requestOptions = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + this.$store.getters.getToken,
+        },
+      };
+      const messageId = this.$route.params.messageId;
+      fetch(
+        "http://localhost:3000/api/messages/" +  messageId + "/comments/" + commentId,
+        requestOptions
+      )
+        .then(() => {
+          this.comments.splice(index, 1);
+        })
+        .catch((error) => console.log("cannot delete comment " + error));
     },
 
     postComment() {
@@ -157,5 +173,8 @@ h1 {
 .card {
   max-height: 35vh !important;
   padding: 1vw;
+}
+.bc {
+  background-color: rgb(247, 247, 247) !important;
 }
 </style>

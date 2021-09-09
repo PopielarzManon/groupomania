@@ -14,7 +14,7 @@ router.get('/:id', auth,  messageCtrl.getOneMessage);
 // router.get('/:id', )
 router.get('/:messageId/comments',auth, commentsCtrl.listComments);
 router.post('/:messageId/comments', auth, commentsCtrl.createComment);
-router.delete('/:messageId/comments', auth, commentsCtrl.deleteComment);
+router.delete('/:messageId/comments/:id', auth, commentsCtrl.deleteComment);
 
 
 
