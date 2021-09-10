@@ -6,7 +6,17 @@ Utiliser le jeu de données fourni avec utilisateurs :
 Admin : admin
         admin@admin.fr
         adminadmin
+Tartenpion : Tartenpion
+             test@test.fr
+             Test01test
 
+Kévin :     Kévin
+            test2@test.fr
+            Test01test
+
+Magalie :   Magalie
+            test3@test.fr
+            Test01test
 
 OU
 

@@ -37,13 +37,13 @@ exports.createComment = (req, res, next) =>{
         if (!res.locals.isAdmin) {
             db.Comment.destroy({
               where: {
-                id: req.params.id, UserId: res.locals.id
+                id: req.params.id, UserId: res.locals.userId
               }
         
         
             })
               .then(() => res.status(200).json({ message: "Commentaire supprimé !" }))
-              .catch((error) => res.status(400).json({ error }));
+            //   .catch((error) => res.status(400).json({ error }));
           } else {
             db.Comment.destroy({
               where: {

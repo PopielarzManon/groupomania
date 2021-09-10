@@ -11,7 +11,7 @@
               <v-text-field
                 v-model="message.title"
                 :rules="titleRules"
-                :counter="30"
+                :counter="100"
                 label="Titre"
                 required
               ></v-text-field>
@@ -64,12 +64,11 @@ export default {
       titleRules: [
         (v) => !!v || "Champs Obligatoire",
         (v) =>
-          v.length <= 20 || "Votre titre doit comporter moins de 30 caractères",
+          v.length <= 100 || "Votre titre doit comporter moins de 100 caractères",
       ],
       contentRules: [
-        (v) => !!v || "Champs Obligatoire",
         (v) =>
-          v.length <= 20 ||
+          v.length <= 140 ||
           "Votre contenu doit comporter moins de 140 caractères",
         //v => checkEmail puis fetch vers db OU popup erreur
       ],

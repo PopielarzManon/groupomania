@@ -49,7 +49,7 @@ exports.deleteMessage = (req, res, next) => {
   if (!res.locals.isAdmin) {
     db.Message.destroy({
       where: {
-        id: req.params.id, UserId: res.locals.id
+        id: req.params.id, UserId: res.locals.userId
       }
 
 
