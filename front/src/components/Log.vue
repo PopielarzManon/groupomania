@@ -110,4 +110,27 @@ export default {
     color: rgb(0, 0, 0);
   }
 }
+@media (min-width: 320px) and (max-width: 426px) {
+  .routerLink {
+    font-size: 4vw !important;
+    color: pink;
+    text-decoration: none;
+    padding: 2vw !important;
+
+    &:hover {
+      color: rgb(37, 37, 37);
+    }
+  }
+  h1 {
+    font-size: 6vw;
+  }
+  p {
+    font-size: 5vw;
+    text-align: center;
+  }
+  img {
+    height: 40vw;
+    width: 40vw;
+  }
+}
 </style>

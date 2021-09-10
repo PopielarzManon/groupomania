@@ -162,7 +162,8 @@ export default {
 
 <style lang="scss" scoped>
 .comment {
-  padding-top: 2vw;
+  padding: 2vw;
+  list-style: none;
 }
 h1 {
   text-align: center;
@@ -171,10 +172,29 @@ h1 {
   font-size: 2vw;
 }
 .card {
-  max-height: 35vh !important;
+  max-height: 40vh !important;
   padding: 1vw;
 }
 .bc {
   background-color: rgb(247, 247, 247) !important;
+}
+@media (min-width: 320px) and (max-width: 426px) {
+  .comment {
+  margin: 4vw;
+  list-style: none;
+}
+h1 {
+  text-align: center;
+  color: pink;
+  padding: 3vw;
+  font-size: 5vw;
+}
+.card {
+  max-height: 47vh !important;
+  padding: 1vw;
+}
+.bc {
+  background-color: rgb(247, 247, 247) !important;
+}
 }
 </style>

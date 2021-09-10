@@ -118,5 +118,7 @@ export default {
     color: pink;
   }
 }
-// v-if="userId == message.UserId || user.isAdmin == 1"
+a{
+  text-decoration: none;
+}
 </style>

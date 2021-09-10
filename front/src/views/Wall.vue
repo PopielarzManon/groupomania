@@ -61,4 +61,36 @@ h1{
   color: pink;
   padding: 2vw;
 }
+a{
+  text-decoration: none !important;
+}
+@media (min-width: 320px) and (max-width: 426px) {
+  h1{
+    padding-top: 15vw;
+    font-size: 6vw;
+  }
+  .float{
+	position:fixed;
+	width:10vw !important;
+	height:10vw !important;
+	bottom: 7vw;
+	right:7vw;
+	background-color:pink;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+  .my-float{
+    font-size: 6vw !important;
+    
+      color: rgb(255, 255, 255) !important;
+      &:hover{
+        color: rgb(145, 145, 145)  !important;;
+      }
+  }
+}
+a{
+  text-decoration: none !important;
+}
+}
 </style>
